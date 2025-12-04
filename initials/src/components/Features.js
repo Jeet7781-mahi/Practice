@@ -20,7 +20,7 @@ export default function Features() {
       <h3 className="text-white text-3xl font-bold">What do want to study?</h3>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="container grid grid-cols-1 md:grid-cols-3 gap-6">
         <Feature icon={faEarthAfrica} title="Flexibility" desc="Learn on your schedule with self-paced and instructor-led options." />
         <Feature icon={faReceipt} title="Quality" desc="Industry-aligned curriculum and expert faculty support." />
         <Feature icon={faVideo} title="Career Guidance" desc="Personalized counselling and admission assistance." />

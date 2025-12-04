@@ -21,12 +21,7 @@ code {
 }
 
 /* Hero.js header section */
-#home{
-  background: url(./Images/portrait-graduated-boy.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
+
 
 .right-section{
   font-size: 1rem;
@@ -40,4 +35,112 @@ code {
   background-position: bottom;
   zoom: 100%;
 }
+.top-bar {
+  background: #2d2d2d;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+  font-size: 14px;
+  align-items: center;
+}
+
+.social-icons svg {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.blog-link {
+  font-weight: bold;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  background: #fff;
+}
+
+.logo {
+  height: 60px;
+}
+
+.contact-info {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.contact-info svg {
+  margin-right: 6px;
+}
+
+.enroll-btn {
+  background: #0556b0;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.navbar {
+  background: #1b4c8a;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.navbar a {
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* place in your global css file (index.css) or a component css imported earlier */
+
+/* ensure Swiper's default arrows are invisible (we use custom ones) */
+.university-swiper .swiper-button-next,
+.university-swiper .swiper-button-prev {
+  display: none !important;
+}
+
+/* Positioning tweaks for our custom uni-prev & uni-next buttons */
+/* They are hidden on small screens (Tailwind .hidden md:flex handles most) */
+/* Fine tune the left/right offset if needed by changing translateX values */
+
+.uni-prev {
+  left: 12px;   /* push left of container - adjust to taste */
+}
+
+.uni-next {
+  right: 12px;  /* push right of container */
+}
+
+/* Slightly larger click area on touch devices */
+@media (min-width: 768px) {
+  .uni-prev, .uni-next {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+}
+
+/* If your container is centered and you want arrow slightly further out: */
+@media (min-width: 1024px) {
+  /* example: move outside more */
+  .uni-prev { left: 34px; }
+  .uni-next { right: 34px; }
+}
+.uni-prev, .uni-next,.course-next,.course-prev{
+  margin-top: 2rem;
+}
+
+
+
 
