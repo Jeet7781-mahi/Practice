@@ -1,7 +1,17 @@
-import React from "react";
-import aboutImg from "../Images/portrait-three-smiling-graduate-friends-graduation-robes-university-campus-with-diploma.jpg";
+import React,{useState,useEffect} from "react";
+const API_URL = "https://easylearne.com/wp-json/wp/v2/pages/7";
 
 const AboutSection = () => {
+     const [aboutData, setAboutData] = useState(null);
+    useEffect(() => {
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((data) => setAboutData(data.acf))
+      .catch((err) => console.error("About API Error:", err));
+     }, []);
+    if (!aboutData) {
+        return <div className="text-center py-20">Loading...</div>;
+    }
   return (
     <section className="w-full py-10 sm:py-14 lg:py-20 bg-white">
       <div className="
@@ -15,7 +25,7 @@ const AboutSection = () => {
         {/* Image */}
         <div className="flex justify-center">
           <img 
-            src={aboutImg} 
+            src={aboutData.about_image} 
             alt="Students" 
             className="
               w-full 
@@ -48,13 +58,8 @@ const AboutSection = () => {
               text-[clamp(0.85rem,1.2vw,1.1rem)]
               leading-relaxed
               max-w-xl
-            "
-          >
-            EasyLearn Educare is a trusted educational consultancy in Kolkata, 
-            guiding students toward top MBA and professional colleges across India. 
-            We provide expert counselling, admission assistance, and career 
-            guidance to help students achieve their academic and professional dreams.
-          </p>
+            " dangerouslySetInnerHTML={{ __html: aboutData.about_description }}
+          />
 
           {/* Button */}
           <button 

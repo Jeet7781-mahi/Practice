@@ -1,13 +1,12 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
-import banner1 from "../Images/banner1.jpeg";
-import banner2 from "../Images/banner2.jpg";
-import banner3 from "../Images/banner3.jpeg";
+
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+const API_URL = "https://easylearne.com/wp-json/wp/v2/pages/7";
 
 // StatBoxes component (as revised above)
 const StatBoxes = () => {
@@ -43,22 +42,20 @@ const StatBoxes = () => {
 };
 
 export default function Hero() {
+     const [heroData, setHeroData] = useState(null);
+    useEffect(() => {
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((data) => setHeroData(data.acf))
+      .catch((err) => console.error("Hero API Error:", err));
+     }, []);
+    if (!heroData) {
+        return <div className="text-center py-20">Loading...</div>;
+    }
   const slides = [
-    {
-      id: 1,
-      bg: banner1,
-      showText: true,
-      showBoxes: true,
-      title: (
-        <p className="font-bold">
-          Transform Your <span className="text-blue-500">Future With</span> Expert-Led Courses
-        </p>
-      ),
-      subtitle:
-        "EasyLearn Educare is a trusted educational consultancy in Kolkata, guiding students toward MBA and global programs.",
-    },
-    { id: 2, bg: banner2 },
-    { id: 3, bg: banner3 },
+    { id: 1, bg: heroData.hero_banner_1 ,showText: true,showBoxes: true },
+    { id: 2, bg: heroData.hero_banner_2 },
+    { id: 3, bg: heroData.hero_banner_3 },
   ];
 
   return (
@@ -81,7 +78,7 @@ export default function Hero() {
   {/* Correct Responsive Image Behavior */}
  <img
   src={slide.bg}
-  alt="banner"
+  alt="easyLearne"
   className="
     w-full h-full 
     object-cover 
@@ -117,16 +114,15 @@ export default function Hero() {
             font-bold 
             leading-tight
             text-[clamp(1rem,4vw,2.8rem)]
-          ">
-            {slide.title}
-          </h1>
+          " dangerouslySetInnerHTML={{ __html: heroData.hero_header }}/>
+          
+         
 
           <p className="
             text-[clamp(0.65rem,1.4vw,1.15rem)] 
-            opacity-90 font-light
-          " style={{ paddingRight: "99px" }}>
-            {slide.subtitle}
-          </p>
+            opacity-90 font-semibold
+          " style={{ paddingRight: "99px" }}  dangerouslySetInnerHTML={{ __html: heroData.hero_description }} />
+            
 
           {/* Buttons */}
           <div className="flex inline-grid lg:[display:flex] justify-center lg:justify-start gap-3 pt-2">
